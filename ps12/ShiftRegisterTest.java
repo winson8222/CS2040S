@@ -1,3 +1,4 @@
+// Copy your ShiftRegisterTest.java code here
 import static org.junit.Assert.*;
 
 import org.junit.Test;
@@ -31,9 +32,11 @@ public class ShiftRegisterTest {
             assertEquals(expected[i], r.shift());
         }
     }
-
+    /**
+     * Tests shift with when tap is the first element of the seed.
+     */
     @Test
-    public void testShift2() {
+    public void testShiftedge2() {
         ILFShiftRegister r = getRegister(5, 0);
         int[] seed = { 1,1,0,0,1 };
         r.setSeed(seed);
@@ -42,7 +45,9 @@ public class ShiftRegisterTest {
             assertEquals(expected[i], r.shift());
         }
     }
-
+    /**
+     * Tests shift with when tap is the last element of the seed.
+     */
     @Test
     public void testShiftedge() {
         ILFShiftRegister r = getRegister(5, 4);
@@ -64,10 +69,12 @@ public class ShiftRegisterTest {
         r.setSeed(seed);
         int[] expected = { 6, 1, 7, 2, 2, 1, 6, 6, 2, 3 };
         for (int i = 0; i < 10; i++) {
-            assertEquals("GenerateTest", expected[i], r.generate(3));
+            assertEquals("GenerateTest1", expected[i], r.generate(3));
         }
     }
-
+    /**
+     * Tests generate with another simple example with different tap and length of seed.
+     */
     @Test
     public void testGenerate2() {
         ILFShiftRegister r = getRegister(3, 1);
@@ -76,6 +83,33 @@ public class ShiftRegisterTest {
         int[] expected = { 3,2,1,1 };
         for (int i = 0; i < 4; i++) {
             assertEquals("GenerateTest2", expected[i], r.generate(2));
+        }
+    }
+
+    /**
+     * Tests generate with another simple example with tap being the start of the array.
+     */
+    @Test
+    public void testGenerateEdge() {
+        ILFShiftRegister r = getRegister(3, 0);
+        int[] seed = { 0, 1, 0 };
+        r.setSeed(seed);
+        int[] expected = { 1,3,1,0 };
+        for (int i = 0; i < 4; i++) {
+            assertEquals("GenerateTestEdge", expected[i], r.generate(2));
+        }
+    }
+    /**
+     * Tests generate when tap is the last element of the register
+     */
+    @Test
+    public void testGenerateEdge2() {
+        ILFShiftRegister r = getRegister(3, 2);
+        int[] seed = { 0, 1, 0 };
+        r.setSeed(seed);
+        int[] expected = { 0,0,0,0 };
+        for (int i = 0; i < 4; i++) {
+            assertEquals("GenerateEdge2", expected[i], r.generate(2));
         }
     }
     /**
@@ -91,7 +125,9 @@ public class ShiftRegisterTest {
             assertEquals(expected[i], r.generate(3));
         }
     }
-
+    /**
+     * Tests register of when tap is the last element of the register.
+     */
     @Test
     public void testedge() {
         ILFShiftRegister r = getRegister(2, 1);
@@ -106,7 +142,8 @@ public class ShiftRegisterTest {
     /**
      * Tests with erroneous seed.
      * Comments: A proper response to this error is to throw an error in the setSeed function. The right way to
-     * test this case is to check if the size of seed is equals to the length of seed.
+     * test this case is to check if the size of seed is equals to the length of seed. ALso test when seed includes digit other than 1 and 0,
+     * also when the tap is greater than the length of the seed.
      */
     @Test
     public void testError() {
