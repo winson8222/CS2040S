@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="CS2040S">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/tut1.zip!/" />
+      <root url="jar://$PROJECT_DIR$/lab1-winson8222-master.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
